@@ -1,11 +1,11 @@
-import { addDoc, collection, getFirestore, updateDoc } from "firebase/firestore"
+import { addDoc, collection, getFirestore } from "firebase/firestore"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useCartContext } from "../../context/CartContext"
 
 const CartContainer = () => {
   const [ dataForm, setFormData ] = useState({
-    userName: '',
+    name: '',
     email: '',
     phone: '',
   })
@@ -36,7 +36,7 @@ const CartContainer = () => {
   const handleOnChange = (e) => {
     setFormData({
       ... dataForm,
-      [e.target.userName]: e.target.value
+      [e.target.name]: e.target.value
     })
   }
 
@@ -47,9 +47,9 @@ const CartContainer = () => {
         <button className="cart-button" onClick={emptyCart}>Vaciar carrito</button>
       </div>
       <form className="cart-inputs" onSubmit={addOrder}>
-          <input type="text" className="cart-user-info" onChange={handleOnChange} name='userName' placeholder="Ingrese su nombre" />
-          <input type="text" className="cart-user-info" onChange={handleOnChange} name='phone' placeholder="Ingrese su número de teléfono" />
-          <input type="text" className="cart-user-info" onChange={handleOnChange} name='email' placeholder="Ingrese su mail" />
+          <input type="text" className="cart-user-info" value={dataForm.name} onChange={handleOnChange} name='name' placeholder="Ingrese su nombre" />
+          <input type="text" className="cart-user-info" value={dataForm.phone} onChange={handleOnChange} name='phone' placeholder="Ingrese su número de teléfono" />
+          <input type="text" className="cart-user-info" value={dataForm.email} onChange={handleOnChange} name='email' placeholder="Ingrese su mail" />
           <button className="cart-button-finish">Terminar compra</button>
       </form>
       { cartList.length !== 0 ?

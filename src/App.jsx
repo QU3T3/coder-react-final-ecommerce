@@ -7,7 +7,7 @@ import CartContainer from './containers/CartContainer/CartContainer'
 import { CartContextProvider } from './context/CartContext'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount ] = useState(0)
 
   return (
     <BrowserRouter>
