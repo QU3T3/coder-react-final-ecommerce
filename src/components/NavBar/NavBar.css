@@ -1,6 +1,6 @@
 .nav{
     height: 80px;
-    background-color: rgb(56, 56, 56);
+    background: rgb(40, 40, 40);
     display: flex;
     align-items: center;
     justify-content: space-between  ;
@@ -8,51 +8,54 @@
 
 .title{
     font-weight: 500;
-    font-size: 1.5em;
+    font-size: 3em;
     color: rgb(255, 255, 255);
     margin-left: 2em;
     text-decoration: none;
 }
 
 .title:hover{
-    color: white;
-    transform: scale(1.2);
+    transform: scale(1.1);
+    color: rgb(238, 238, 238);
 }
 
 span{
-    font-weight: 700;
+    font-weight: 800;
+    color: rgb(255, 95, 149);
 }
 
 .cart{
     text-decoration: none;
-    color: white;
-    margin-right: 2em;
-    transform: scale(1.5);
+    color: rgb(255, 95, 149);
+    margin-right: 3em;
+    font-size: 2.8em;
 }
 
 .cart:hover{
-    color: white;
-    transform: scale(2);
+    color: rgb(255, 95, 149);
+    transform: scale(1.4);
 }
 
 .dslink{
     text-decoration: none;
-    color: white;
+    color: rgb(238, 238, 238);
     margin-right: 2em;
+    font-size: 2em;
 }
 
 .dslink:hover{
-    color: white;
+    color: rgb(238, 238, 238);
     border-bottom: solid white 2px;
 }
 
 .threedslink{
     text-decoration: none;
-    color: white;
+    color: rgb(238, 238, 238);
     margin-right: 2em;
+    font-size: 2em;
 }
 
 .threedslink:hover{
-    color: white;
+    color: rgb(238, 238, 238);
     border-bottom: solid white 2px;
 }

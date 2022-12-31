@@ -19,16 +19,14 @@ const ItemCount = ({ stock=10, initial=1, onAdd}) => {
   }
 
   return (
-    <div className='card'>
-      <div className="card-header">
-        <label htmlFor="">{count}</label>
-      </div>
-      <div className="card-body">
-        <button onClick={handleCountAdd} className='btn btn-outline-danger'>+</button>
-        <button onClick={handleCountRemove} className='btn btn-outline-danger'>-</button>
+    <div className='card-buy'>
+      <div className="card-options">
+        <button onClick={handleCountAdd} className='card-button-plus'>+</button>
+        <label className='card-number' htmlFor="">{count}</label>
+        <button onClick={handleCountRemove} className='card-button-minus'>-</button>
       </div>
       <div className="card-footer">
-        <button className='btn btn-outline-success btn-block' onClick={ ()=> onAdd(count) } >Agregar al carrito</button>
+        <button className='card-add-cart' onClick={ ()=> onAdd(count) } >Agregar al carrito</button>
       </div>
     </div>
   )

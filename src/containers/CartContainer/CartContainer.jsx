@@ -1,27 +1,78 @@
+import { addDoc, collection, getFirestore, updateDoc } from "firebase/firestore"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useCartContext } from "../../context/CartContext"
 
 const CartContainer = () => {
-  const {cartList, emptyCart, totalPrice} = useCartContext()
+  const [ dataForm, setFormData ] = useState({
+    userName: '',
+    email: '',
+    phone: '',
+  })
+  const {cartList, emptyCart, totalPrice, deleteItem} = useCartContext()
+
+  const addOrder = (e) => { 
+    e.preventDefault()
+    const order = {}
+    order.buyer = dataForm
+    order.price = totalPrice()
+    order.items = cartList.map(({id, price, name}) => ({id, price, name}))
+
+    const db = getFirestore()
+    const queryCollection = collection(db, 'orders')
+
+      addDoc(queryCollection, order)
+
+      .then(resp =>
+        Swal.fire({
+        title: "¡Compra realizada!",
+        text: `Gracias por su compra. Id: ${resp.id}`
+        }))
+      .catch(err => console.log(err))
+      .finally(() => emptyCart())
+
+  }
+
+  const handleOnChange = (e) => {
+    setFormData({
+      ... dataForm,
+      [e.target.userName]: e.target.value
+    })
+  }
+
   return (
-    <div>
+    <div className="finish-cart">
+      <div className="cart-options">
+        <h4 className="cart-total">El precio total es: $ {totalPrice()} </h4>
+        <button className="cart-button" onClick={emptyCart}>Vaciar carrito</button>
+      </div>
+      <form className="cart-inputs" onSubmit={addOrder}>
+          <input type="text" className="cart-user-info" onChange={handleOnChange} name='userName' placeholder="Ingrese su nombre" />
+          <input type="text" className="cart-user-info" onChange={handleOnChange} name='phone' placeholder="Ingrese su número de teléfono" />
+          <input type="text" className="cart-user-info" onChange={handleOnChange} name='email' placeholder="Ingrese su mail" />
+          <button className="cart-button-finish">Terminar compra</button>
+      </form>
       { cartList.length !== 0 ?
-      <>
-        {cartList.map(prod => <div key={prod.id}>
-                                <img src={prod.urlImage} alt="" className="w-25" />
-                              Nombre { prod.name } - Precio: { prod.price }
-                                </div>)
-                                }
-                                <h4>El precio total es: {totalPrice()} </h4>
-                                <button className="btn btn-danger" onClick={emptyCart}>Vaciar carrito</button>
-      </>
+      <div className="cart-container">
+        {cartList.map(prod => 
+        <div className="cart-item-container" key={prod.id}>
+          <img src={prod.urlImage} alt="" className="cart-item-img" />
+          <div className="cart-details">
+            <h2 className="item-name" >{ prod.name }</h2>
+            <h2 className="item-price" >$ { prod.price }</h2>
+            <h2 className="item-count" >Cantidad: { prod.count }</h2>
+            <button onClick={() => deleteItem(prod.id)} className="item-cancel"> Quitar del carrito </button>
+          </div>
+        </div>
+          )
+        }
+      </div>
       
       :
 
-      <>
-        <h2>Su carrito vacio</h2>
-        <Link to='/'>Ir al Home</Link>
-      </>
+      <div className="cart-home">
+        <Link className="back-home" to='/'><h5>Ir al Home</h5></Link>
+      </div>
 }
     </div>
   )

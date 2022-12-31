@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { gFetch } from "../../helper/gFetch"
+
 import ItemDetail from "../../components/ItemDetail/ItemDetail"
 import { doc, getDoc, getDocs, getFirestore } from 'firebase/firestore'
 import Loading from "../ItemListContainer/ItemListContainer"
@@ -24,7 +24,7 @@ const ItemDetailContainer = () => {
     return (
 
         <>
-            { loading ? <Loading/> : <ItemDetail product={product}/> }
+            { <ItemDetail product={product}/> }
         </>
         
     )

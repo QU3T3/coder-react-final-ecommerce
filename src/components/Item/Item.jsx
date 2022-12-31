@@ -2,24 +2,22 @@ import { Link } from 'react-router-dom'
 
 const Item = ({ product }) => {
   return (
-    <div style={{ marginLeft: 100}} className='col-md-3'>    
-      <div className="card w-100 mt-5" >
-        <div className="card-header">
-          {`${product.name}`}
-        </div>
-        <div className="card-body">
-          <img src={product.urlImage} alt='' className='w-50' />
-          {product.price}                                                            
-        </div>
-        <div className="card-footer">    
+    <div className="item-card">
+      <div className="item-img">
+        <img className='card-image' src={product.urlImage} alt='Producto'/>
+      </div>
+      <div className="item-content">   
+        <h2 className='item-name' >{`${product.name}`}</h2>
+        <h2 className='item-price'>$ {product.price}</h2>   
+        <div>
           <Link to={`/detail/${product.id}`}>
-            <button className="btn btn-outline-primary btn-block">
+            <button className="item-detalle">
               Detalle del producto
             </button>
-          </Link>                                                    
-        </div>
-      </div>  
-    </div>
+          </Link>
+        </div>                                             
+      </div>
+    </div>                                                    
   )
 }
 

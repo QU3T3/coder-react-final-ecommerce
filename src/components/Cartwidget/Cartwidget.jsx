@@ -6,7 +6,7 @@ export const Cartwidget = () => {
   const {totalCount} = useCartContext()
   return (
     <div>
-      {totalCount() !== 0 && totalCount}
+      {totalCount() !== 0 && totalCount()}
         <AiOutlineShoppingCart/>
     </div>
   )
